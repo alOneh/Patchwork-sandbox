@@ -7,7 +7,7 @@ AcceptPathInfo On
 #</Files>
 
 # A second way to get friendly URLs
-# http://httpd.apache.org/docs/2.0/fr/content-negotiation.html#multiviews
+# http://httpd.apache.org/docs/2.0/content-negotiation.html#multiviews
 #Options +Multiviews
 #MultiviewsMatch Handlers Filters
 
