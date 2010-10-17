@@ -1,4 +1,5 @@
 AcceptPathInfo On
+Allow from all
 
 # Here is a first way to get friendly URLs
 #<Files bootstrap_file_here>
@@ -13,7 +14,6 @@ AcceptPathInfo On
 
 # And a third way to get friendly URLs
 <IfModule mod_rewrite.c>
-  Allow from all
   RewriteEngine On
 
   <Files index>
@@ -35,23 +35,6 @@ AcceptPathInfo On
   RewriteCond %{ENV:PATCHWORK_REQUEST} ^$
   RewriteRule .* index.php [E=PATCHWORK_REQUEST:/$0]
 </IfModule>
-
-<IfModule !mod_rewrite.c>
-  # By default, deny access to any file except the web bootstrapper
-  Deny from all
-
-  <Files index.php>
-    Allow from all
-  </Files>
-  <Files index>
-    Allow from all
-  </Files>
-  <Files "">
-    Allow from all
-  </Files>
-</IfModule>
-
-
 
 # You should really consider X-Sendfile
 <IfModule mod_xsendfile.c>

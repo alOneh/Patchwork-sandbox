@@ -1,3 +1,3 @@
 <?php
 
-#patchwork ../
+#patchwork ../app
