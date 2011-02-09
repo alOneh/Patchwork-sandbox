@@ -1,18 +1,15 @@
 AcceptPathInfo On
 Allow from all
 
-# Here is a first way to get friendly URLs
-#<Files bootstrap_file_here>
-#  ForceType application/x-httpd-php
-#  Allow from all
-#</Files>
+# Uncomment to enable PHP5
+# - on OVH:
+#SetEnv PHP_VER 5
+# - on free.fr:
+#php 1
+# - on 1&1:
+#AddType x-mapp-php5 .php
 
-# A second way to get friendly URLs
-# http://httpd.apache.org/docs/2.0/content-negotiation.html#multiviews
-#Options +Multiviews
-#MultiviewsMatch Handlers Filters
-
-# And a third way to get friendly URLs
+# A first and default way to get friendly URLs
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
@@ -36,43 +33,49 @@ Allow from all
   RewriteRule .* index.php [E=PATCHWORK_REQUEST:/$0]
 </IfModule>
 
-# You should really consider X-Sendfile
+# A second way to get friendly URLs
+#<Files bootstrap_file_here>
+#  ForceType application/x-httpd-php
+#</Files>
+
+# A third way to get friendly URLs
+# http://httpd.apache.org/docs/2.0/content-negotiation.html#multiviews
+#Options +Multiviews
+#MultiviewsMatch Handlers Filters
+
+# You should really consider X-Sendfile or equivalent
 <IfModule mod_xsendfile.c>
   SetEnv PATCHWORK_XSENDFILE "X-Sendfile: %s"
-  XSendFile On
+  XSendFile           On
   XSendFileAllowAbove On
 </IfModule>
 
-# Some common env vars
+# Some env vars (for OVH at least)
 SetEnv REGISTER_GLOBALS 0
-SetEnv ZEND_OPTIMIZER 1
-SetEnv MAGIC_QUOTES 0
-# Uncomment to enable PHP5 on OVH
-#SetEnv PHP_VER 5
+SetEnv ZEND_OPTIMIZER   1
+SetEnv MAGIC_QUOTES     0
 
 <IfModule mod_php5.c>
   # Edit this to your default timezone. See http://php.net/timezones
   #php_value date.timezone "Universal"
 
-  # Uncomment to enable PHP5 on free.fr
-  #php 1
-
-  php_flag display_errors Off
-  php_flag magic_quotes_gpc Off
-  php_flag register_globals Off
-  php_flag register_long_arrays Off
-  php_flag register_argc_argv Off
-  php_flag auto_globals_jit On
-
-  php_flag session.auto_start Off
+  php_flag  display_errors           Off
+  php_flag  magic_quotes_gpc         Off
+  php_flag  register_globals         Off
+  php_flag  register_long_arrays     Off
+  php_flag  register_argc_argv       Off
+  php_flag  auto_globals_jit          On
+  php_flag  session.auto_start       Off
+  php_value pcre.backtrack_limit 5000000
+  php_value pcre.recursion_limit   10000
 
   # Tuning of mbstring
-  php_value mbstring.func_overload 0
-  php_value mbstring.language "neutral"
+  php_value mbstring.func_overload             0
+  php_value mbstring.language          "neutral"
   php_value mbstring.substitute_character "none"
-  php_flag  mbstring.encoding_translation Off
-  php_value mbstring.http_input "pass"
-  php_value mbstring.http_output "pass"
+  php_flag  mbstring.encoding_translation    Off
+  php_value mbstring.http_input           "pass"
+  php_value mbstring.http_output          "pass"
 
   # Tune this if you have problems uploading large files
   # General rule is:
@@ -80,14 +83,15 @@ SetEnv MAGIC_QUOTES 0
   # - post_max_size >= 2 x upload_max_filesize
   # - memory_limit  > post_max_size
   #php_value upload_max_filesize "32M"
-  #php_value post_max_size "64M"
-  #php_value memory_limit  "128M"
+  #php_value post_max_size       "64M"
+  #php_value memory_limit       "128M"
 
   # More tuning, for performance, but only if the current
   # directory contains only applications that can handle it.
   #php_flag  mbstring.encoding_translation On
   #php_value mbstring.http_input "UTF-8"
-
+  #php_value exif.encode_unicode "UTF-8"
+  #php_value exif.encode_jis     "UTF-8"
   #php_value iconv.input_encoding    "UTF-8//IGNORE"
   #php_value iconv.internal_encoding "UTF-8//IGNORE"
   #php_value iconv.output_encoding   "UTF-8//IGNORE"

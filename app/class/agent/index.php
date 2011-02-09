@@ -12,7 +12,7 @@
  ***************************************************************************/
 
 
-class extends agent
+class agent_index extends agent
 {
 	function compose($o)
 	{
