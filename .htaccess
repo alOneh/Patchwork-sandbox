@@ -68,6 +68,7 @@ SetEnv MAGIC_QUOTES     0
   php_flag  session.auto_start       Off
   php_value pcre.backtrack_limit 5000000
   php_value pcre.recursion_limit   10000
+  php_value serialize_precision       17
 
   # Tuning of mbstring
   php_value mbstring.func_overload             0
@@ -76,6 +77,7 @@ SetEnv MAGIC_QUOTES     0
   php_flag  mbstring.encoding_translation    Off
   php_value mbstring.http_input           "pass"
   php_value mbstring.http_output          "pass"
+  php_value mbstring.script_encoding      "pass"
 
   # Tune this if you have problems uploading large files
   # General rule is:
@@ -89,10 +91,11 @@ SetEnv MAGIC_QUOTES     0
   # More tuning, for performance, but only if the current
   # directory contains only applications that can handle it.
   #php_flag  mbstring.encoding_translation On
-  #php_value mbstring.http_input "UTF-8"
-  #php_value exif.encode_unicode "UTF-8"
-  #php_value exif.encode_jis     "UTF-8"
-  #php_value iconv.input_encoding    "UTF-8//IGNORE"
-  #php_value iconv.internal_encoding "UTF-8//IGNORE"
-  #php_value iconv.output_encoding   "UTF-8//IGNORE"
+  #php_value mbstring.internal_encoding "UTF-8"
+  #php_value mbstring.http_input        "UTF-8"
+  #php_value exif.encode_unicode        "UTF-8"
+  #php_value exif.encode_jis            "UTF-8"
+  #php_value iconv.input_encoding       "UTF-8//IGNORE"
+  #php_value iconv.internal_encoding    "UTF-8//IGNORE"
+  #php_value iconv.output_encoding      "UTF-8//IGNORE"
 </IfModule>
