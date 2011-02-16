@@ -1,12 +1,10 @@
 <?php
 
-// Set the path to your patchwork application directory:
+// Cache directory of your patchwork application:
 define('PATCHWORK_BOOTPATH', './cache');
 
-// Set the path to patchwork's bootstrapper.php file:
-$a = './vendor/patchwork/bootstrapper.php';
+// Include patchwork's bootstrapper.php:
+include './vendor/patchwork/bootstrapper.php';
 
-
-$a = include file_exists(PATCHWORK_BOOTPATH . '/.patchwork.php')
-	? PATCHWORK_BOOTPATH . '/.patchwork.php' : $a;
-$a || die("Failed inclusion of patchwork's bootstrapper.php in " . __FILE__);
+// This point should never be reached
+die("Failed inclusion of patchwork's bootstrapper.php in " . __FILE__);

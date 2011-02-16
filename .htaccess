@@ -1,5 +1,6 @@
 AcceptPathInfo On
 Allow from all
+DirectoryIndex index.php
 
 # Uncomment to enable PHP5
 # - on OVH:
