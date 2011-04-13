@@ -15,9 +15,8 @@ Installation
 
 On Linux or Windows:
 
- 1. Create a `patchwork-sandbox` directory into your _www_ folder
- 2. Open the command shell on this directory
+ 1. Open the command shell and go into your _www_ folder
  3. Download the code with:
-    `git clone --recursive git://github.com/nicolas-grekas/Patchwork-sandbox.git .`
- 4. Open your browser to http://localhost/patchwork-sandbox/
+    `git clone --recursive git://github.com/nicolas-grekas/Patchwork-sandbox.git`
+ 4. Open your browser to http://localhost/Patchwork-sandbox/
  5. Hello World!
